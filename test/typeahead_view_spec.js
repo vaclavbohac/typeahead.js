@@ -68,6 +68,22 @@ describe('Typeahead', function() {
     });
   });
 
+  describe('when dropdown triggers highlighted', function () {
+    beforeEach(function() {
+      this.dropdown.getDatumForCursor.andReturn(testDatum);
+    });
+
+    it('should trigger highlighted', function() {
+      var spy;
+
+      this.$input.on('typeahead:highlighted', spy = jasmine.createSpy());
+
+      this.dropdown.trigger('highlighted');
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
   describe('when dropdown triggers cursorRemoved', function() {
     it('should reset the input value', function() {
       this.dropdown.trigger('cursorRemoved');

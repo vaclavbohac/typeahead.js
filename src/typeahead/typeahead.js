@@ -56,6 +56,7 @@ var Typeahead = (function() {
 
     this.dropdown = new Dropdown({ menu: $menu, datasets: o.datasets })
     .onSync('suggestionClicked', this._onSuggestionClicked, this)
+    .onSync('highlighted', this._onHighlighted, this)
     .onSync('cursorMoved', this._onCursorMoved, this)
     .onSync('cursorRemoved', this._onCursorRemoved, this)
     .onSync('opened', this._onOpened, this)
@@ -91,6 +92,12 @@ var Typeahead = (function() {
       if (datum = this.dropdown.getDatumForSuggestion($el)) {
         this._select(datum);
       }
+    },
+
+    _onHighlighted: function onHighlighted() {
+      var datum = this.dropdown.getDatumForCursor();
+
+      this.eventBus.trigger('highlighted', datum.raw, datum.datasetName);
     },
 
     _onCursorMoved: function onCursorMoved() {

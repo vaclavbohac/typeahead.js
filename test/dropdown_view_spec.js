@@ -68,6 +68,17 @@ describe('Dropdown', function() {
 
       expect(spy).not.toHaveBeenCalled();
     });
+
+    it('should trigger highlighted', function () {
+      var spy, $suggestion;
+
+      this.view.onSync('highlighted', spy = jasmine.createSpy());
+
+      $suggestion = this.$menu.find('.tt-suggestion').first();
+      $suggestion.mouseenter();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 
   describe('when mouseleave is triggered on a suggestion', function() {

@@ -92,6 +92,8 @@ var Dropdown = (function() {
       $el.first().addClass('tt-cursor');
 
       !silent && this.trigger('cursorMoved');
+
+      this.trigger('highlighted');
     },
 
     _removeCursor: function removeCursor() {
